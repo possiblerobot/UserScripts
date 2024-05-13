@@ -4,8 +4,8 @@
 // @version         05  
 // @description     Bypasses affiliate links from multiple sources.  
 // @author          possiblerobot  
-// @downloadURL     na  
-// @updateURL       na  
+// @downloadURL     https://raw.githubusercontent.com/possiblerobot/UserScripts/main/LinkSoap.user.js  
+// @updateURL       https://raw.githubusercontent.com/possiblerobot/UserScripts/main/LinkSoap.user.js  
 // @homepageURL     na  
 // @supportURL      na  
 // @license         na  
