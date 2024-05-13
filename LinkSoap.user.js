@@ -1,6 +1,6 @@
 
 // ==UserScript==  
-// @name            Affiliate Link Cleaner  
+// @name            LinkSoap - Affiliate Link Cleaner
 // @version         05  
 // @description     Bypasses affiliate links from multiple sources.  
 // @author          possiblerobot  
