@@ -10,7 +10,7 @@
 // @supportURL      na  
 // @license         na  
 // @match       *://*/*  
-// @run-at         document-start // The script executes as soon as the document starts loading, before most other dynamic content.  
+// @run-at         document-idle  
 // ==/UserScript==
 
 // Function to check if a URL is an affiliate link.  
