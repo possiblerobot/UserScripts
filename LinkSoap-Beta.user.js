@@ -1,16 +1,15 @@
-
 // ==UserScript==  
-// @name            LinkSoap - Affiliate Link Cleaner
-// @version         07
+// @name            LinkSoap-Beta - Affiliate Link Cleaner  
+// @version         07b  
 // @description     Bypasses affiliate links from multiple sources.  
 // @author          possiblerobot  
-// @downloadURL     https://raw.githubusercontent.com/possiblerobot/UserScripts/main/LinkSoap.user.js  
-// @updateURL       https://raw.githubusercontent.com/possiblerobot/UserScripts/main/LinkSoap.user.js  
+// @downloadURL     na  
+// @updateURL       na  
 // @homepageURL     na  
 // @supportURL      na  
 // @license         na  
-// @match       *://*/*  
-// @run-at         document-start  
+// @match           *://*/*  
+// @run-at          document-start  
 // ==/UserScript==
 
 // Function to check if a URL is an affiliate link.  
