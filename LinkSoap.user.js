@@ -1,7 +1,7 @@
 
 // ==UserScript==  
 // @name            LinkSoap - Affiliate Link Cleaner
-// @version         05  
+// @version         06  
 // @description     Bypasses affiliate links from multiple sources.  
 // @author          possiblerobot  
 // @downloadURL     https://raw.githubusercontent.com/possiblerobot/UserScripts/main/LinkSoap.user.js  
