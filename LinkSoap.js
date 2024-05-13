@@ -1,3 +1,4 @@
+I'm injecting this script into some pages to mark and clean affiliate links. Take a look at the script and then I'll give some further instructions:
 
 // ==UserScript==  
 // @name            Affiliate Link Cleaner  
