@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LinkSoap-Beta - Affiliate Link Cleaner
-// @version         10b
+// @version         11b
 // @description     Bypasses affiliate links from multiple sources.
 // @author          possiblerobot
 // @downloadURL     na
@@ -12,21 +12,26 @@
 // @run-at          document-start
 // ==/UserScript==
 
-// Function to check if a URL is an affiliate link using regular expressions.
-function isAffiliateLink(url) {
+// Function to get the readable domain name if a URL is an affiliate link
+function getAffiliateDomain(url) {
     const affiliatePatterns = [
-        /go\.skimresources\.com/,
-        /go\.redirectingat\.com/,
-        /click\.linksynergy\.com/,
-        /www\.avantlink\.com/,
-        /www\.dpbolvw\.net/,
-        /www\.awin1\.com/,
-        /goto\.walmart\.com/,
-        /(?:[a-z0-9-]+\.)?sjv\.io/,
-        /www\.anrdoezrs\.net/        
+        { pattern: /go\.skimresources\.com/, domain: 'go.skimresources.com' },
+        { pattern: /go\.redirectingat\.com/, domain: 'go.redirectingat.com' },
+        { pattern: /click\.linksynergy\.com/, domain: 'click.linksynergy.com' },
+        { pattern: /www\.avantlink\.com/, domain: 'www.avantlink.com' },
+        { pattern: /www\.dpbolvw\.net/, domain: 'www.dpbolvw.net' },
+        { pattern: /www\.awin1\.com/, domain: 'www.awin1.com' },
+        { pattern: /goto\.walmart\.com/, domain: 'goto.walmart.com' },
+        { pattern: /(?:[a-z0-9-]+\.)?sjv\.io/, domain: 'sjv.io' }, // Handled separately
+        { pattern: /www\.anrdoezrs\.net/, domain: 'www.anrdoezrs.net' }
     ];
 
-    return affiliatePatterns.some(pattern => pattern.test(url));
+    for (const { pattern, domain } of affiliatePatterns) {
+        if (pattern.test(url)) {
+            return domain;
+        }
+    }
+    return null;
 }
 
 // Function to decode the actual target URL from an affiliate link's parameters.
@@ -48,11 +53,12 @@ function decodeTargetUrl(link) {
 
 // Function to modify the affiliate link.
 function modifyLink(link) {
-    if (isAffiliateLink(link.href)) {
+    const domain = getAffiliateDomain(link.href);
+    if (domain) {
         const decodedUrl = decodeTargetUrl(link);
         if (decodedUrl !== link.href) { // Only modify the link if it's different from the current URL.
             link.href = decodedUrl;
-            link.title = `This link has been sanitized`;
+            link.title = `This link has been sanitized from ${domain}`;
 
             // Adds a visual indicator (emoji) to modified links.
             if (!link.querySelector('.clean-link-emoji')) {
