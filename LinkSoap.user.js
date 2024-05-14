@@ -1,7 +1,7 @@
 
 // ==UserScript==  
 // @name            LinkSoap - Affiliate Link Cleaner
-// @version         08
+// @version         09
 // @description     Bypasses affiliate links from multiple sources.  
 // @author          possiblerobot  
 // @downloadURL     https://raw.githubusercontent.com/possiblerobot/UserScripts/main/LinkSoap.user.js  
@@ -23,13 +23,13 @@ function isAffiliateLink(url) {
         /www\.dpbolvw\.net/,
         /www\.awin1\.com/,
         /goto\.walmart\.com/,
-        /apple\.sjv\.io/  // Added Apple affiliate URL
+        /(?:[a-z0-9-]+\.)?sjv\.io/,  // Generic `sjv.io` support
+        /www\.anrdoezrs\.net/        // Added anrdoezrs.net support
     ];
-
+    
     for (const pattern of affiliatePatterns) {
         if (pattern.test(url)) {
-            // Remove backslashes before dots
-            const domain = pattern.source.replace(/\\/g, '');
+            const domain = url.match(pattern)[0]; // Extract the matched domain part
             return { isMatch: true, domain: domain };
         }
     }
@@ -43,9 +43,9 @@ function decodeTargetUrl(link) {
     // Decodes parameters that might contain the real, intended destination URL.
     return decodeURIComponent(
         params.get('murl') ||        // Parameter used by some affiliate networks.
-        params.get('url') ||         // Commonly used parameter for redirection.
+        params.get('url') ||         // Commonly used parameter for redirection (including anrdoezrs.net).
         params.get('ued') ||         // Specific to certain networks.
-        params.get('u')              // Walmart and Apple-specific parameter
+        params.get('u')              // Parameter used by Walmart, Apple, and other sjv.io subdomains
     ) || link.href; // Fallback to the original link if no redirection parameter is found.
 }
 
@@ -85,7 +85,11 @@ function processLinks() {
 }
 
 // Event listener for the DOMContentLoaded event to start the modification process as soon as the DOM is ready.
-document.addEventListener('DOMContentLoaded', processLinks);
+document.addEventListener('DOMContentLoaded', () => {
+    processLinks();
+    // Call processLinks again one second after the page load completes.
+    setTimeout(processLinks, 1000);
+});
 
 // Event listener for the pageshow event to handle cases when navigating back to the page from cache.
 window.addEventListener("pageshow", function(event) {
