@@ -1,7 +1,7 @@
 
 // ==UserScript==  
 // @name            LinkSoap - Affiliate Link Cleaner
-// @version         11
+// @version         12
 // @description     Bypasses affiliate links from multiple sources.  
 // @author          possiblerobot  
 // @downloadURL     https://raw.githubusercontent.com/possiblerobot/UserScripts/main/LinkSoap.user.js  
@@ -16,15 +16,19 @@
 // Function to get the readable domain name if a URL is an affiliate link
 function getAffiliateDomain(url) {
     const affiliatePatterns = [
-        { pattern: /go\.skimresources\.com/, domain: 'go.skimresources.com' },
-        { pattern: /go\.redirectingat\.com/, domain: 'go.redirectingat.com' },
-        { pattern: /click\.linksynergy\.com/, domain: 'click.linksynergy.com' },
-        { pattern: /www\.avantlink\.com/, domain: 'www.avantlink.com' },
-        { pattern: /www\.dpbolvw\.net/, domain: 'www.dpbolvw.net' },
-        { pattern: /www\.awin1\.com/, domain: 'www.awin1.com' },
-        { pattern: /goto\.walmart\.com/, domain: 'goto.walmart.com' },
-        { pattern: /(?:[a-z0-9-]+\.)?sjv\.io/, domain: 'sjv.io' }, // Handled separately
-        { pattern: /www\.anrdoezrs\.net/, domain: 'www.anrdoezrs.net' }
+        { pattern: /go\.skimresources\.com/, domain: 'skimresources.com' },
+        { pattern: /go\.redirectingat\.com/, domain: 'redirectingat.com' },
+        { pattern: /click\.linksynergy\.com/, domain: 'linksynergy.com' },
+        { pattern: /avantlink\.com/, domain: 'avantlink.com' },
+        { pattern: /dpbolvw\.net/, domain: 'dpbolvw.net' },
+        { pattern: /awin1\.com/, domain: 'awin1.com' },
+        { pattern: /goto\.walmart\.com/, domain: 'walmart.com' },
+        { pattern: /sjv\.io/, domain: 'sjv.io' },  // Simplified sjv.io pattern
+        { pattern: /anrdoezrs\.net/, domain: 'anrdoezrs.net' },
+        { pattern: /pntrac\.com/, domain: 'pntrac.com' },
+        { pattern: /kqzyfj\.com/, domain: 'kqzyfj.com' },
+        { pattern: /pntra\.com/, domain: 'pntra.com' },
+        { pattern: /igs4ds\.net/, domain: 'igs4ds.net' }
     ];
     
     for (const { pattern, domain } of affiliatePatterns) {
@@ -41,7 +45,7 @@ function decodeTargetUrl(link) {
     const params = url.searchParams;
     const potentialTargets = [
         params.get('murl'),
-        params.get('url'),
+        params.get('url'),     // Common parameter for target URLs
         params.get('ued'),
         params.get('u')
     ];
