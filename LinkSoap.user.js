@@ -1,7 +1,7 @@
 
 // ==UserScript==  
 // @name            LinkSoap - Affiliate Link Cleaner
-// @version         12
+// @version         13
 // @description     Bypasses affiliate links from multiple sources.  
 // @author          possiblerobot  
 // @downloadURL     https://raw.githubusercontent.com/possiblerobot/UserScripts/main/LinkSoap.user.js  
@@ -12,6 +12,11 @@
 // @match       *://*/*  
 // @run-at         document-start  
 // ==/UserScript==
+
+// Check to prevent the script from running in frames with a different origin
+if (window.location.origin !== window.top.location.origin) {
+    return; // Exit the script if it's in a cross-origin frame
+}
 
 // Function to get the readable domain name if a URL is an affiliate link
 function getAffiliateDomain(url) {

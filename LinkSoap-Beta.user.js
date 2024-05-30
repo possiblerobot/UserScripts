@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            LinkSoap-Beta - Affiliate Link Cleaner
-// @version         12b
+// @version         13b
 // @description     Bypasses affiliate links from multiple sources.
 // @author  
 // @downloadURL     na
@@ -11,6 +11,11 @@
 // @match           *://*/*
 // @run-at          document-start
 // ==/UserScript==
+
+// Check to prevent the script from running in frames with a different origin
+if (window.location.origin !== window.top.location.origin) {
+    return; // Exit the script if it's in a cross-origin frame
+}
 
 // Function to get the readable domain name if a URL is an affiliate link
 function getAffiliateDomain(url) {
